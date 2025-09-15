@@ -1,0 +1,66 @@
+name: music_player
+description: "A premium Flutter music player with glassmorphism design"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.5.0
+  flutter: ">=3.35.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # UI Icons
+  cupertino_icons: ^1.0.8
+
+  # State management
+  flutter_riverpod: ^3.0.0
+  riverpod_annotation: ^3.0.0
+
+  # Audio playback
+  just_audio: ^0.10.5
+  just_audio_background: ^0.0.1-beta.13
+  audio_service: ^0.18.15
+
+  # Media metadata - removed for compatibility
+  # No metadata extraction for now - basic file scanning only
+
+  # File system and permissions
+  permission_handler: ^12.0.1
+  path_provider: ^2.1.4
+  path: ^1.9.1
+
+  # Storage
+  shared_preferences: ^2.3.2
+
+  # UI enhancements
+  flutter_blurhash: ^0.9.1
+  palette_generator: ^0.3.3+4
+  glassmorphism: ^3.0.0
+  flutter_staggered_animations: ^1.1.1
+
+  # Additional utilities
+  uuid: ^4.5.1
+  intl: ^0.20.2
+  equatable: ^2.0.5
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  riverpod_generator: ^3.0.0
+  build_runner: ^2.4.13
+  custom_lint: ^0.8.0
+  riverpod_lint: ^3.0.0
+
+flutter:
+  uses-material-design: true
+
+  # Assets
+  assets:
+    - assets/images/
+    - assets/audio/
