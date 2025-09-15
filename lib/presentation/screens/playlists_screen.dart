@@ -5,7 +5,6 @@ import '../widgets/music_player_bar.dart';
 import '../providers/music_library_provider.dart';
 import '../../core/constants/app_colors.dart';
 import '../../data/models/playlist.dart';
-import '../../data/models/song.dart';
 
 class PlaylistsScreen extends ConsumerStatefulWidget {
   const PlaylistsScreen({super.key});

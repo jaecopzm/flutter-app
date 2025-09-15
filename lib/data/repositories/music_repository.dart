@@ -1,6 +1,6 @@
+import 'package:music_player/data/models/album.dart';
+
 import '../../data/models/song.dart';
-import '../../data/models/playlist.dart';
-import '../../data/models/album.dart';
 import '../../data/services/music_scanner_service.dart';
 
 /// Repository for music data operations

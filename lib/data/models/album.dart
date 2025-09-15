@@ -46,7 +46,7 @@ class Album {
     });
 
     return Album(
-      id: '${artist}_${albumTitle}'.replaceAll(' ', '_').toLowerCase(),
+      id: '${artist}_$albumTitle'.replaceAll(' ', '_').toLowerCase(),
       title: albumTitle,
       artist: artist,
       songs: albumSongs,

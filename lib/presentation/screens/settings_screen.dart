@@ -80,7 +80,7 @@ class SettingsScreen extends ConsumerWidget {
                           value: themeState.isDarkMode,
                           onChanged: (value) => themeNotifier.toggleTheme(),
                           activeTrackColor: AppColors.accentElectric.withValues(alpha: 0.5),
-                          activeColor: AppColors.accentElectric,
+                          activeThumbColor: AppColors.accentElectric,
                         ),
                       ),
                     ),

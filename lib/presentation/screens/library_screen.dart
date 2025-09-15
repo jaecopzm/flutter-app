@@ -137,7 +137,6 @@ class LibraryScreen extends ConsumerWidget {
 
   Widget _buildStatCard(BuildContext context, String value, String label, IconData icon) {
     return GlassContainer(
-      height: 70, // Reduced height
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
         child: Column(

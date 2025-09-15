@@ -49,9 +49,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 child: Text(
                   'Search',
                   style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
                 ),
               ),
 
@@ -83,7 +83,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                 setState(() {
                                   _searchQuery = '';
                                 });
-                                ref.read(searchQueryProvider.notifier).state = '';
+                                ref.read(searchQueryProvider.notifier).state =
+                                    '';
                               },
                               icon: const Icon(
                                 Icons.clear_rounded,
@@ -135,9 +136,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             Text(
               'Recently Played',
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-                fontWeight: FontWeight.w600,
-              ),
+                    color: Theme.of(context).colorScheme.onSurface,
+                    fontWeight: FontWeight.w600,
+                  ),
             ),
             const SizedBox(height: 12),
             ...libraryState.recentlyPlayedSongs.take(5).map(
@@ -150,9 +151,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           Text(
             'Browse All',
             style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-              fontWeight: FontWeight.w600,
-            ),
+                  color: Theme.of(context).colorScheme.onSurface,
+                  fontWeight: FontWeight.w600,
+                ),
           ),
           const SizedBox(height: 12),
 
@@ -224,15 +225,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
           Text(
             'No results found',
             style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-              color: AppColors.textSecondary,
-            ),
+                  color: AppColors.textSecondary,
+                ),
           ),
           const SizedBox(height: 8),
           Text(
             'Try searching with different keywords',
             style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-              color: AppColors.textMuted,
-            ),
+                  color: AppColors.textMuted,
+                ),
             textAlign: TextAlign.center,
           ),
         ],
@@ -259,16 +260,16 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         title: Text(
           song.title,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         subtitle: Text(
           subtitle,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+                color: AppColors.textSecondary,
+              ),
         ),
         trailing: Icon(
           Icons.play_arrow_rounded,
@@ -300,24 +301,24 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
         title: Text(
           song.title,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+                color: Theme.of(context).colorScheme.onSurface,
+              ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         subtitle: Text(
           '${song.artist} • ${song.album}',
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: AppColors.textSecondary,
-          ),
+                color: AppColors.textSecondary,
+              ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
         trailing: Text(
           song.formattedDuration,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.textMuted,
-          ),
+                color: AppColors.textMuted,
+              ),
         ),
         onTap: () {
           // TODO: Play song
@@ -326,7 +327,8 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     );
   }
 
-  Widget _buildCategoryCard(String title, String subtitle, IconData icon, Color color) {
+  Widget _buildCategoryCard(
+      String title, String subtitle, IconData icon, Color color) {
     return GlassContainer(
       child: InkWell(
         onTap: () {
@@ -351,18 +353,26 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 ),
               ),
               const SizedBox(height: 12),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface,
-                  fontWeight: FontWeight.w600,
+              Flexible(
+                child: Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurface,
+                        fontWeight: FontWeight.w600,
+                      ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               const SizedBox(height: 4),
-              Text(
-                subtitle,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: AppColors.textSecondary,
+              Flexible(
+                child: Text(
+                  subtitle,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ],

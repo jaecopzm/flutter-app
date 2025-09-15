@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:music_player/data/models/song.dart';
 import '../../core/constants/app_colors.dart';
-import '../../core/constants/app_constants.dart';
-import '../../data/models/song.dart';
 import '../providers/audio_player_provider.dart';
 import '../screens/player_screen.dart';
 

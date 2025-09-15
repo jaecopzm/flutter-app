@@ -17,12 +17,10 @@ class AppTheme {
         secondary: AppColors.accentPurple,
         tertiary: AppColors.accentElectric,
         surface: AppColors.cardBackground,
-        background: AppColors.primaryDark,
         error: AppColors.error,
         onPrimary: AppColors.textPrimary,
         onSecondary: AppColors.textPrimary,
         onSurface: AppColors.textPrimary,
-        onBackground: AppColors.textPrimary,
         onError: AppColors.textPrimary,
       ),
 
@@ -187,7 +185,7 @@ class AppTheme {
         activeTrackColor: AppColors.accentElectric,
         inactiveTrackColor: AppColors.controlBackground,
         thumbColor: AppColors.accentElectric,
-        overlayColor: AppColors.accentElectric.withOpacity(0.2),
+        overlayColor: AppColors.accentElectric.withAlpha(51),
         trackHeight: 4,
         thumbShape: const RoundSliderThumbShape(
           enabledThumbRadius: 8,
@@ -239,7 +237,7 @@ class AppGradients {
     end: Alignment.bottomRight,
     colors: [
       AppColors.cardBackground,
-      AppColors.cardBackground.withValues(alpha: 0.5),
+      AppColors.cardBackground.withOpacity(0.5),
     ],
   );
 }
