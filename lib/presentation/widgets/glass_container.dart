@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_colors_v2.dart';
 
 /// A glassmorphism-style container with frosted glass effect
 class GlassContainer extends StatelessWidget {
@@ -47,16 +47,16 @@ class GlassContainer extends StatelessWidget {
           child: Container(
             padding: padding ?? const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: (isDark ? AppColors.glassBlack : AppColors.glassWhite)
+              color: (isDark ? AppColorsV2.glassBlack : AppColorsV2.glassWhite)
                   .withValues(alpha: opacity),
               borderRadius: borderRadius ?? BorderRadius.circular(16.0),
               border: border ?? Border.all(
-                color: AppColors.glassOverlay.withValues(alpha: 0.2),
+                color: AppColorsV2.glassOverlay.withValues(alpha: 0.2),
                 width: 1.0,
               ),
               boxShadow: boxShadow ?? [
                 BoxShadow(
-                  color: AppColors.shadowPrimary.withValues(alpha: 0.1),
+                  color: AppColorsV2.shadowPrimary.withValues(alpha: 0.1),
                   blurRadius: 10,
                   offset: const Offset(0, 4),
                 ),

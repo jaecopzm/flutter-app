@@ -1,5 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod/legacy.dart';
 import 'package:just_audio/just_audio.dart';
 import '../../data/models/song.dart';
 import '../../data/models/playlist.dart';
@@ -72,17 +71,22 @@ class AudioPlayerState {
 
   bool get hasNext => currentIndex < queue.length - 1;
   bool get hasPrevious => currentIndex > 0;
+  bool get isPlaying => playbackState == PlaybackState.playing;
 
   Song? get nextSong => hasNext ? queue[currentIndex + 1] : null;
   Song? get previousSong => hasPrevious ? queue[currentIndex - 1] : null;
 }
 
 /// Audio player notifier
-class AudioPlayerNotifier extends StateNotifier<AudioPlayerState> {
+class AudioPlayerNotifier extends Notifier<AudioPlayerState> {
   final AudioPlayer _audioPlayer;
 
-  AudioPlayerNotifier(this._audioPlayer) : super(AudioPlayerState()) {
+  AudioPlayerNotifier(this._audioPlayer);
+
+  @override
+  AudioPlayerState build() {
     _setupAudioPlayerListeners();
+    return AudioPlayerState();
   }
 
   void _setupAudioPlayerListeners() {
@@ -243,15 +247,13 @@ class AudioPlayerNotifier extends StateNotifier<AudioPlayerState> {
     );
   }
 
-  @override
   void dispose() {
     _audioPlayer.dispose();
-    super.dispose();
   }
 }
 
 /// Audio player provider
-final audioPlayerProvider = StateNotifierProvider<AudioPlayerNotifier, AudioPlayerState>((ref) {
+final audioPlayerProvider = NotifierProvider<AudioPlayerNotifier, AudioPlayerState>(() {
   final audioPlayer = AudioPlayer();
   return AudioPlayerNotifier(audioPlayer);
 });

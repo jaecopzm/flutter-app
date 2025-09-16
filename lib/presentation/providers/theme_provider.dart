@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_colors_v2.dart';
 import '../../core/constants/app_constants.dart';
-import '../../core/theme/app_theme.dart';
+import '../../core/theme/app_theme_v2.dart';
 
 /// Theme mode state
 class ThemeState {
@@ -15,7 +15,7 @@ class ThemeState {
   ThemeState({
     this.themeMode = ThemeMode.dark,
     this.isDarkMode = true,
-  }) : currentTheme = isDarkMode ? AppTheme.darkTheme : AppTheme.lightTheme;
+  }) : currentTheme = isDarkMode ? AppThemeV2.darkTheme : AppThemeV2.darkTheme;
 
   ThemeState copyWith({
     ThemeMode? themeMode,
@@ -116,21 +116,21 @@ class ThemeUtils {
   Color getTextColor(BuildContext context, {bool isSecondary = false}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     if (isSecondary) {
-      return isDark ? AppColors.textSecondary : AppColorsLight.onSurface;
+      return isDark ? AppColorsV2.textSecondary : AppColorsV2.onSurface;
     }
-    return isDark ? AppColors.textPrimary : AppColorsLight.onBackground;
+    return isDark ? AppColorsV2.textPrimary : AppColorsV2.onBackground;
   }
 
   /// Get appropriate surface color
   Color getSurfaceColor(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return isDark ? AppColors.cardBackground : AppColorsLight.surface;
+    return isDark ? AppColorsV2.cardBackground : AppColorsV2.surface;
   }
 
   /// Get appropriate glass effect color
   Color getGlassColor(BuildContext context, {double opacity = 0.8}) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return (isDark ? AppColors.glassBlack : AppColors.glassWhite).withValues(alpha: opacity);
+    return (isDark ? AppColorsV2.glassBlack : AppColorsV2.glassWhite).withValues(alpha: opacity);
   }
 
   /// Get gradient background
@@ -147,6 +147,6 @@ class ThemeUtils {
   /// Get theme-aware shadow color
   Color getShadowColor(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return (isDark ? AppColors.shadowPrimary : AppColors.shadowAccent).withValues(alpha: 0.1);
+    return (isDark ? AppColorsV2.shadowPrimary : AppColorsV2.shadowAccent).withValues(alpha: 0.1);
   }
 }

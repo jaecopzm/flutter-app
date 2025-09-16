@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/animated_album_art.dart';
 import '../providers/audio_player_provider.dart';
-import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_colors_v2.dart';
 import '../../data/models/song.dart';
 
 class PlayerScreen extends ConsumerWidget {
@@ -46,7 +46,7 @@ class PlayerScreen extends ConsumerWidget {
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(
                         Icons.keyboard_arrow_down_rounded,
-                        color: AppColors.textPrimary,
+                        color: AppColorsV2.textPrimary,
                         size: 32,
                       ),
                     ),
@@ -55,7 +55,7 @@ class PlayerScreen extends ConsumerWidget {
                       onPressed: () {},
                       icon: const Icon(
                         Icons.more_vert_rounded,
-                        color: AppColors.textPrimary,
+                        color: AppColorsV2.textPrimary,
                       ),
                     ),
                   ],
@@ -91,7 +91,7 @@ class PlayerScreen extends ConsumerWidget {
                     Text(
                       audioState.currentSong!.artist,
                       style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        color: AppColors.textSecondary,
+                        color: AppColorsV2.textSecondary,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -114,8 +114,8 @@ class PlayerScreen extends ConsumerWidget {
                         );
                         audioPlayer.seekTo(position);
                       },
-                      activeColor: AppColors.accentElectric,
-                      inactiveColor: AppColors.controlBackground,
+                      activeColor: AppColorsV2.accentElectric,
+                      inactiveColor: AppColorsV2.controlBackground,
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -125,13 +125,13 @@ class PlayerScreen extends ConsumerWidget {
                           Text(
                             _formatDuration(audioState.position),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppColors.textSecondary,
+                              color: AppColorsV2.textSecondary,
                             ),
                           ),
                           Text(
                             _formatDuration(audioState.duration),
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: AppColors.textSecondary,
+                              color: AppColorsV2.textSecondary,
                             ),
                           ),
                         ],
@@ -155,8 +155,8 @@ class PlayerScreen extends ConsumerWidget {
                       icon: Icon(
                         Icons.shuffle_rounded,
                         color: audioState.isShuffleEnabled
-                            ? AppColors.accentElectric
-                            : AppColors.textSecondary,
+                            ? AppColorsV2.accentElectric
+                            : AppColorsV2.textSecondary,
                         size: 28,
                       ),
                     ),
@@ -171,8 +171,8 @@ class PlayerScreen extends ConsumerWidget {
                       icon: Icon(
                         Icons.skip_previous_rounded,
                         color: audioState.hasPrevious
-                            ? AppColors.textPrimary
-                            : AppColors.textMuted,
+                            ? AppColorsV2.textPrimary
+                            : AppColorsV2.textMuted,
                         size: 36,
                       ),
                     ),
@@ -184,11 +184,11 @@ class PlayerScreen extends ConsumerWidget {
                       width: 72,
                       height: 72,
                       decoration: BoxDecoration(
-                        color: AppColors.accentElectric,
+                        color: AppColorsV2.accentElectric,
                         borderRadius: BorderRadius.circular(36),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.accentElectric.withValues(alpha: 0.3),
+                            color: AppColorsV2.accentElectric.withValues(alpha: 0.3),
                             blurRadius: 20,
                             offset: const Offset(0, 8),
                           ),
@@ -200,7 +200,7 @@ class PlayerScreen extends ConsumerWidget {
                           audioState.playbackState == PlaybackState.playing
                               ? Icons.pause_rounded
                               : Icons.play_arrow_rounded,
-                          color: AppColors.textPrimary,
+                          color: AppColorsV2.textPrimary,
                           size: 36,
                         ),
                       ),
@@ -216,8 +216,8 @@ class PlayerScreen extends ConsumerWidget {
                       icon: Icon(
                         Icons.skip_next_rounded,
                         color: audioState.hasNext
-                            ? AppColors.textPrimary
-                            : AppColors.textMuted,
+                            ? AppColorsV2.textPrimary
+                            : AppColorsV2.textMuted,
                         size: 36,
                       ),
                     ),
@@ -246,8 +246,8 @@ class PlayerScreen extends ConsumerWidget {
                             ? Icons.repeat_one_rounded
                             : Icons.repeat_rounded,
                         color: audioState.repeatMode != RepeatMode.off
-                            ? AppColors.accentElectric
-                            : AppColors.textSecondary,
+                            ? AppColorsV2.accentElectric
+                            : AppColorsV2.textSecondary,
                         size: 28,
                       ),
                     ),
@@ -305,7 +305,7 @@ class PlayerScreen extends ConsumerWidget {
                         onPressed: () {},
                         child: const Text(
                           'View Queue',
-                          style: TextStyle(color: AppColors.accentElectric),
+                          style: TextStyle(color: AppColorsV2.accentElectric),
                         ),
                       ),
                     ],
@@ -330,11 +330,11 @@ class PlayerScreen extends ConsumerWidget {
                               height: 40,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: AppColors.controlBackground,
+                                color: AppColorsV2.controlBackground,
                               ),
                               child: Icon(
                                 Icons.music_note_rounded,
-                                color: AppColors.textSecondary,
+                                color: AppColorsV2.textSecondary,
                                 size: 20,
                               ),
                             ),
@@ -355,7 +355,7 @@ class PlayerScreen extends ConsumerWidget {
                                   Text(
                                     song.artist,
                                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: AppColors.textSecondary,
+                                      color: AppColorsV2.textSecondary,
                                     ),
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
@@ -390,14 +390,14 @@ class PlayerScreen extends ConsumerWidget {
           onPressed: onPressed,
           icon: Icon(
             icon,
-            color: AppColors.textSecondary,
+            color: AppColorsV2.textSecondary,
             size: 28,
           ),
         ),
         Text(
           label,
           style: Theme.of(context).textTheme.bodySmall?.copyWith(
-            color: AppColors.textSecondary,
+            color: AppColorsV2.textSecondary,
           ),
         ),
       ],

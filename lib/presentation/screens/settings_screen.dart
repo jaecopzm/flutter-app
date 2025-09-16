@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../widgets/glass_container.dart';
 import '../providers/theme_provider.dart';
-import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_colors_v2.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -37,7 +37,7 @@ class SettingsScreen extends ConsumerWidget {
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(
                         Icons.arrow_back_rounded,
-                        color: AppColors.textPrimary,
+                        color: AppColorsV2.textPrimary,
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -73,14 +73,14 @@ class SettingsScreen extends ConsumerWidget {
                         subtitle: Text(
                           themeState.isDarkMode ? 'Dark' : 'Light',
                           style: const TextStyle(
-                            color: AppColors.textSecondary,
+                            color: AppColorsV2.textSecondary,
                           ),
                         ),
                         trailing: Switch(
                           value: themeState.isDarkMode,
                           onChanged: (value) => themeNotifier.toggleTheme(),
-                          activeTrackColor: AppColors.accentElectric.withValues(alpha: 0.5),
-                          activeThumbColor: AppColors.accentElectric,
+                          activeTrackColor: AppColorsV2.accentElectric.withValues(alpha: 0.5),
+                          activeThumbColor: AppColorsV2.accentElectric,
                         ),
                       ),
                     ),
@@ -94,15 +94,15 @@ class SettingsScreen extends ConsumerWidget {
                       child: ListTile(
                         title: const Text(
                           'Audio Quality',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColorsV2.textPrimary),
                         ),
                         subtitle: const Text(
                           'High Quality',
-                          style: TextStyle(color: AppColors.textSecondary),
+                          style: TextStyle(color: AppColorsV2.textSecondary),
                         ),
                         trailing: const Icon(
                           Icons.chevron_right_rounded,
-                          color: AppColors.textSecondary,
+                          color: AppColorsV2.textSecondary,
                         ),
                         onTap: () {
                           // TODO: Show audio quality options
@@ -115,15 +115,15 @@ class SettingsScreen extends ConsumerWidget {
                       child: ListTile(
                         title: const Text(
                           'Equalizer',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColorsV2.textPrimary),
                         ),
                         subtitle: const Text(
                           'Customize sound',
-                          style: TextStyle(color: AppColors.textSecondary),
+                          style: TextStyle(color: AppColorsV2.textSecondary),
                         ),
                         trailing: const Icon(
                           Icons.chevron_right_rounded,
-                          color: AppColors.textSecondary,
+                          color: AppColorsV2.textSecondary,
                         ),
                         onTap: () {
                           // TODO: Open equalizer
@@ -140,15 +140,15 @@ class SettingsScreen extends ConsumerWidget {
                       child: ListTile(
                         title: const Text(
                           'Scan Music Library',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColorsV2.textPrimary),
                         ),
                         subtitle: const Text(
                           'Refresh your music collection',
-                          style: TextStyle(color: AppColors.textSecondary),
+                          style: TextStyle(color: AppColorsV2.textSecondary),
                         ),
                         trailing: const Icon(
                           Icons.refresh_rounded,
-                          color: AppColors.accentElectric,
+                          color: AppColorsV2.accentElectric,
                         ),
                         onTap: () {
                           // TODO: Trigger library scan
@@ -165,11 +165,11 @@ class SettingsScreen extends ConsumerWidget {
                       child: ListTile(
                         title: const Text(
                           'Version',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColorsV2.textPrimary),
                         ),
                         subtitle: const Text(
                           '1.0.0',
-                          style: TextStyle(color: AppColors.textSecondary),
+                          style: TextStyle(color: AppColorsV2.textSecondary),
                         ),
                       ),
                     ),
@@ -179,11 +179,11 @@ class SettingsScreen extends ConsumerWidget {
                       child: ListTile(
                         title: const Text(
                           'Privacy Policy',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColorsV2.textPrimary),
                         ),
                         trailing: const Icon(
                           Icons.chevron_right_rounded,
-                          color: AppColors.textSecondary,
+                          color: AppColorsV2.textSecondary,
                         ),
                         onTap: () {
                           // TODO: Open privacy policy
@@ -196,11 +196,11 @@ class SettingsScreen extends ConsumerWidget {
                       child: ListTile(
                         title: const Text(
                           'Terms of Service',
-                          style: TextStyle(color: AppColors.textPrimary),
+                          style: TextStyle(color: AppColorsV2.textPrimary),
                         ),
                         trailing: const Icon(
                           Icons.chevron_right_rounded,
-                          color: AppColors.textSecondary,
+                          color: AppColorsV2.textSecondary,
                         ),
                         onTap: () {
                           // TODO: Open terms of service
@@ -225,7 +225,7 @@ class SettingsScreen extends ConsumerWidget {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
-          color: AppColors.accentElectric,
+          color: AppColorsV2.accentElectric,
         ),
       ),
     );

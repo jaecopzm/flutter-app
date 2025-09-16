@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_colors_v2.dart';
 import '../../data/models/song.dart';
 import '../providers/audio_player_provider.dart';
 
@@ -96,19 +96,19 @@ class _AnimatedAlbumArtState extends ConsumerState<AnimatedAlbumArt>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.accentElectric.withValues(alpha: 0.3),
-            AppColors.accentPurple.withValues(alpha: 0.3),
-            AppColors.primaryLight.withValues(alpha: 0.3),
+            AppColorsV2.accentElectric.withValues(alpha: 0.3),
+            AppColorsV2.accentPurple.withValues(alpha: 0.3),
+            AppColorsV2.primaryLight.withValues(alpha: 0.3),
           ],
         ),
         boxShadow: [
           BoxShadow(
-            color: AppColors.accentElectric.withValues(alpha: 0.2),
+            color: AppColorsV2.accentElectric.withValues(alpha: 0.2),
             blurRadius: 20,
             spreadRadius: 5,
           ),
           BoxShadow(
-            color: AppColors.shadowPrimary.withValues(alpha: 0.1),
+            color: AppColorsV2.shadowPrimary.withValues(alpha: 0.1),
             blurRadius: 30,
             offset: const Offset(0, 10),
           ),
@@ -137,14 +137,14 @@ class _AnimatedAlbumArtState extends ConsumerState<AnimatedAlbumArt>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.controlBackground,
-            AppColors.controlBackground.withOpacity(0.5),
+            AppColorsV2.controlBackground,
+            AppColorsV2.controlBackground.withOpacity(0.5),
           ],
         ),
       ),
       child: Icon(
         Icons.music_note_rounded,
-        color: AppColors.textSecondary,
+        color: AppColorsV2.textSecondary,
         size: widget.size * 0.4,
       ),
     );
@@ -233,7 +233,7 @@ class _PulsingAlbumArtState extends ConsumerState<PulsingAlbumArt>
             height: widget.size,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: AppColors.controlBackground,
+              color: AppColorsV2.controlBackground,
               image: widget.albumArtPath != null
                   ? DecorationImage(
                       image: NetworkImage(widget.albumArtPath!),
@@ -244,7 +244,7 @@ class _PulsingAlbumArtState extends ConsumerState<PulsingAlbumArt>
             child: widget.albumArtPath == null
                 ? Icon(
                     Icons.music_note_rounded,
-                    color: AppColors.textSecondary,
+                    color: AppColorsV2.textSecondary,
                     size: widget.size * 0.4,
                   )
                 : null,

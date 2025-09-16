@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'core/theme/app_theme.dart';
+import 'core/theme/app_theme_v2.dart';
 import 'presentation/providers/theme_provider.dart';
-import 'presentation/screens/main_navigation_screen.dart';
+import 'presentation/screens/enhanced_main_navigation_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,14 +26,13 @@ class MusicPlayerApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final themeState = ref.watch(themeProvider);
 
     return MaterialApp(
       title: 'Music Player',
-      theme: AppTheme.lightTheme,
-      darkTheme: AppTheme.darkTheme,
-      themeMode: themeState.themeMode,
-      home: const MainNavigationScreen(),
+      theme: AppThemeV2.darkTheme,
+      darkTheme: AppThemeV2.darkTheme,
+      themeMode: ThemeMode.dark, // Force dark theme for now
+      home: const EnhancedMainNavigationScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

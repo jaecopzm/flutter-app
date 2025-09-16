@@ -105,6 +105,9 @@ class MusicLibraryState {
   List<Playlist> get systemPlaylists {
     return playlists.where((playlist) => playlist.type != PlaylistType.user).toList();
   }
+
+  /// Backward compatibility getter for songs
+  List<Song> get songs => allSongs;
 }
 
 /// Music library notifier
