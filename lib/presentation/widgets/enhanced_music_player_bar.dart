@@ -107,12 +107,12 @@ class _EnhancedMusicPlayerBarState extends ConsumerState<EnhancedMusicPlayerBar>
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    AppColorsV2.surfaceContainer.withOpacity(0.9),
-                    AppColorsV2.surfaceContainerLow.withOpacity(0.8),
+                    AppColorsV2.surfaceContainer.withValues(alpha: 0.9),
+                    AppColorsV2.surfaceContainerLow.withValues(alpha: 0.8),
                   ],
                 ),
                 border: Border.all(
-                  color: AppColorsV2.glassBorder.withOpacity(0.3),
+                  color: AppColorsV2.glassBorder.withValues(alpha: 0.3),
                   width: 1,
                 ),
               ),
@@ -202,7 +202,7 @@ class _EnhancedMusicPlayerBarState extends ConsumerState<EnhancedMusicPlayerBar>
           end: Alignment.bottomRight,
           colors: [
             AppColorsV2.dynamicPrimary.withOpacity(0.3),
-            AppColorsV2.dynamicSecondary.withOpacity(0.3),
+            AppColorsV2.dynamicSecondary.withValues(alpha: 0.3),
           ],
         ),
       ),
@@ -289,7 +289,7 @@ class _EnhancedMusicPlayerBarState extends ConsumerState<EnhancedMusicPlayerBar>
           width: 32,
           height: 32,
           decoration: BoxDecoration(
-            color: AppColorsV2.surfaceContainerHigh.withOpacity(0.8),
+            color: AppColorsV2.surfaceContainerHigh.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(16),
           ),
           child: Material(
@@ -332,7 +332,7 @@ class _EnhancedMusicPlayerBarState extends ConsumerState<EnhancedMusicPlayerBar>
             gradient: LinearGradient(
               colors: [
                 AppColorsV2.dynamicPrimary,
-                AppColorsV2.dynamicPrimary.withOpacity(0.8),
+                AppColorsV2.dynamicPrimary.withValues(alpha: 0.8),
               ],
             ),
             borderRadius: BorderRadius.circular(1),

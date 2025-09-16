@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'dart:io';
+import 'package:device_info_plus/device_info_plus.dart';
 import '../constants/app_colors_v2.dart';
 import '../../presentation/widgets/enhanced_snackbar.dart';
 
@@ -19,6 +20,7 @@ class PermissionService {
 
     try {
       // Show loading feedback
+      if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
       EnhancedSnackbar.showLoading(
         context,
         message: 'Checking storage permissions...',
@@ -38,6 +40,7 @@ class PermissionService {
       // Handle different permission states
       switch (status) {
         case PermissionStatus.granted:
+          if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
           EnhancedSnackbar.showSuccess(
             context,
             message: 'Storage permission granted!',
@@ -54,6 +57,7 @@ class PermissionService {
           return await _handlePermanentlyDenied(context);
 
         case PermissionStatus.restricted:
+          if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
           EnhancedSnackbar.showError(
             context,
             message: 'Storage access is restricted on this device',
@@ -67,6 +71,7 @@ class PermissionService {
           return await _requestPermission(context, permission);
       }
     } catch (e) {
+      if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
       EnhancedSnackbar.showError(
         context,
         message: 'Failed to check permissions: ${e.toString()}',
@@ -85,6 +90,7 @@ class PermissionService {
     Permission permission,
   ) async {
     // Show explanation dialog first
+    if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
     final shouldRequest = await _showPermissionExplanationDialog(context, permission);
     
     if (!shouldRequest) {
@@ -95,6 +101,7 @@ class PermissionService {
     }
 
     // Show requesting feedback
+    if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
     EnhancedSnackbar.showInfo(
       context,
       message: 'Requesting storage permission...',
@@ -105,6 +112,7 @@ class PermissionService {
 
     switch (status) {
       case PermissionStatus.granted:
+        if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
         EnhancedSnackbar.showSuccess(
           context,
           message: 'Storage permission granted! You can now scan for music.',
@@ -115,6 +123,7 @@ class PermissionService {
         );
 
       case PermissionStatus.denied:
+        if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
         EnhancedSnackbar.showWarning(
           context,
           message: 'Storage permission is required to scan for music files',
@@ -130,6 +139,7 @@ class PermissionService {
         return await _handlePermanentlyDenied(context);
 
       default:
+        if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
         EnhancedSnackbar.showError(
           context,
           message: 'Unable to get storage permission',
@@ -143,15 +153,18 @@ class PermissionService {
 
   /// Handle permanently denied permission
   static Future<PermissionResult> _handlePermanentlyDenied(BuildContext context) async {
+    if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
     final result = await _showOpenSettingsDialog(context);
     
     if (result) {
       await openAppSettings();
+      if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
       EnhancedSnackbar.showInfo(
         context,
         message: 'Please enable storage permission in settings and restart the app',
       );
     } else {
+      if (!context.mounted) return const PermissionResult(granted: false, message: 'Context not mounted');
       EnhancedSnackbar.showError(
         context,
         message: 'Storage permission is required to scan for music files',
@@ -169,6 +182,7 @@ class PermissionService {
     BuildContext context,
     Permission permission,
   ) async {
+    if (!context.mounted) return false;
     final result = await showDialog<bool>(
       context: context,
       barrierDismissible: false,
@@ -180,6 +194,7 @@ class PermissionService {
 
   /// Show open settings dialog
   static Future<bool> _showOpenSettingsDialog(BuildContext context) async {
+    if (!context.mounted) return false;
     final result = await showDialog<bool>(
       context: context,
       barrierDismissible: false,
@@ -191,8 +206,11 @@ class PermissionService {
 
   /// Check if Android 13 or higher
   static Future<bool> _isAndroid13OrHigher() async {
-    // This is a simplified check - in a real app you'd check the actual Android version
-    return Platform.isAndroid;
+    if (Platform.isAndroid) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      return androidInfo.version.sdkInt >= 33;
+    }
+    return false;
   }
 
   /// Check if all required permissions are granted

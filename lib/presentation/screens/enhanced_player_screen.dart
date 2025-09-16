@@ -23,12 +23,10 @@ class _EnhancedPlayerScreenState extends ConsumerState<EnhancedPlayerScreen>
   late AnimationController _slideController;
   late AnimationController _albumArtController;
   late AnimationController _controlsController;
-  late AnimationController _progressController;
   
   late Animation<double> _slideAnimation;
   late Animation<double> _albumArtAnimation;
   late Animation<double> _controlsAnimation;
-  late Animation<double> _progressAnimation;
   
   bool _isDraggingSlider = false;
   double _sliderValue = 0.0;
@@ -54,11 +52,6 @@ class _EnhancedPlayerScreenState extends ConsumerState<EnhancedPlayerScreen>
       duration: AppAnimations.medium,
       vsync: this,
     );
-    
-    _progressController = AnimationController(
-      duration: const Duration(milliseconds: 200),
-      vsync: this,
-    );
 
     _slideAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _slideController, curve: AppAnimations.emphasizedCurve),
@@ -70,10 +63,6 @@ class _EnhancedPlayerScreenState extends ConsumerState<EnhancedPlayerScreen>
     
     _controlsAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _controlsController, curve: AppAnimations.standardCurve),
-    );
-    
-    _progressAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(parent: _progressController, curve: Curves.easeInOut),
     );
 
     // Start entrance animations
@@ -91,7 +80,6 @@ class _EnhancedPlayerScreenState extends ConsumerState<EnhancedPlayerScreen>
     _slideController.dispose();
     _albumArtController.dispose();
     _controlsController.dispose();
-    _progressController.dispose();
     super.dispose();
   }
 
@@ -343,7 +331,7 @@ class _EnhancedPlayerScreenState extends ConsumerState<EnhancedPlayerScreen>
     );
   }
 
-  Widget _buildProgressSection(audioState, DynamicColorPalette palette) {
+  Widget _buildProgressSection(AudioPlayerState audioState, DynamicColorPalette palette) {
     final position = audioState.position;
     final duration = audioState.currentSong?.duration ?? Duration.zero;
     final progress = duration.inMilliseconds > 0
@@ -421,7 +409,7 @@ class _EnhancedPlayerScreenState extends ConsumerState<EnhancedPlayerScreen>
     );
   }
 
-  Widget _buildControlsSection(audioState, DynamicColorPalette palette) {
+  Widget _buildControlsSection(AudioPlayerState audioState, DynamicColorPalette palette) {
     return AnimatedBuilder(
       animation: _controlsAnimation,
       builder: (context, child) {
@@ -515,7 +503,7 @@ class _EnhancedPlayerScreenState extends ConsumerState<EnhancedPlayerScreen>
     );
   }
 
-  Widget _buildPlayPauseButton(audioState, DynamicColorPalette palette) {
+  Widget _buildPlayPauseButton(AudioPlayerState audioState, DynamicColorPalette palette) {
     return AdvancedAnimations.rippleButton(
       onTap: () => ref.read(audioPlayerProvider.notifier).togglePlayPause(),
       rippleColor: palette.primary,

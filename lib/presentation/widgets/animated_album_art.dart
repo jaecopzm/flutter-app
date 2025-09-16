@@ -138,7 +138,7 @@ class _AnimatedAlbumArtState extends ConsumerState<AnimatedAlbumArt>
           end: Alignment.bottomRight,
           colors: [
             AppColorsV2.controlBackground,
-            AppColorsV2.controlBackground.withOpacity(0.5),
+            AppColorsV2.controlBackground.withValues(alpha: 0.5),
           ],
         ),
       ),

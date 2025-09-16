@@ -222,11 +222,11 @@ class _EnhancedHomeScreenState extends ConsumerState<EnhancedHomeScreen>
       width: 44,
       height: 44,
       decoration: BoxDecoration(
-        color: AppColorsV2.surfaceContainer.withOpacity(0.8),
-        borderRadius: BorderRadius.circular(22),
+        color: AppColorsV2.surfaceContainer.withValues(alpha: 0.8),
+        borderRadius: BorderRadius.circular(22.0),
         border: Border.all(
-          color: AppColorsV2.glassBorder.withOpacity(0.3),
-          width: 1,
+          color: AppColorsV2.glassBorder.withValues(alpha: 0.3),
+          width: 1.0,
         ),
       ),
       child: Material(
@@ -348,8 +348,8 @@ class _EnhancedHomeScreenState extends ConsumerState<EnhancedHomeScreen>
           color: AppColorsV2.surfaceContainer,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
-            color: AppColorsV2.glassBorder.withOpacity(0.3),
-            width: 1,
+            color: AppColorsV2.glassBorder.withValues(alpha: 0.3),
+            width: 1.0,
           ),
         ),
         child: Material(
@@ -522,22 +522,31 @@ class _EnhancedHomeScreenState extends ConsumerState<EnhancedHomeScreen>
           const SizedBox(height: 8),
           
           // Song info
-          Text(
-            song.title,
-            style: Theme.of(context).textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w600,
-              color: AppColorsV2.onSurface,
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    song.title,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: AppColorsV2.onSurface,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    song.artist,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: AppColorsV2.onSurfaceVariant,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          Text(
-            song.artist,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              color: AppColorsV2.onSurfaceVariant,
-            ),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
           ),
         ],
       ),
@@ -653,7 +662,7 @@ class _EnhancedHomeScreenState extends ConsumerState<EnhancedHomeScreen>
                 end: Alignment.bottomRight,
                 colors: [
                   colors[index % colors.length],
-                  colors[index % colors.length].withOpacity(0.7),
+                  colors[index % colors.length].withValues(alpha: 0.7),
                 ],
               ),
             ),

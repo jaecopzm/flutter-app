@@ -54,7 +54,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
       
       if (playlistsJson != null) {
         final List<dynamic> playlistsList = json.decode(playlistsJson);
-        final playlists = playlistsList
+        final List<EnhancedPlaylist> playlists = playlistsList
             .map((json) => _playlistFromJson(json))
             .where((playlist) => playlist != null)
             .cast<EnhancedPlaylist>()
@@ -103,7 +103,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
         return PlaylistOperationResult.failure('Playlist name already exists');
       }
 
-      final newPlaylist = EnhancedPlaylist.create(
+      final EnhancedPlaylist newPlaylist = EnhancedPlaylist.create(
         name: name,
         description: description,
         isPublic: isPublic,
@@ -125,12 +125,12 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
   /// Update an existing playlist
   Future<PlaylistOperationResult> updatePlaylist(EnhancedPlaylist updatedPlaylist) async {
     try {
-      final index = state.playlists.indexWhere((p) => p.id == updatedPlaylist.id);
+      final int index = state.playlists.indexWhere((p) => p.id == updatedPlaylist.id);
       if (index == -1) {
         return PlaylistOperationResult.failure('Playlist not found');
       }
 
-      final updatedPlaylists = List<EnhancedPlaylist>.from(state.playlists);
+      final List<EnhancedPlaylist> updatedPlaylists = List<EnhancedPlaylist>.from(state.playlists);
       updatedPlaylists[index] = updatedPlaylist.copyWith(updatedAt: DateTime.now());
 
       state = state.copyWith(playlists: updatedPlaylists);
@@ -145,7 +145,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
   /// Delete a playlist
   Future<PlaylistOperationResult> deletePlaylist(String playlistId) async {
     try {
-      final playlist = state.playlists.firstWhere(
+      final EnhancedPlaylist playlist = state.playlists.firstWhere(
         (p) => p.id == playlistId,
         orElse: () => throw Exception('Playlist not found'),
       );
@@ -155,7 +155,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
         return PlaylistOperationResult.failure('Cannot delete system playlists');
       }
 
-      final updatedPlaylists = state.playlists
+      final List<EnhancedPlaylist> updatedPlaylists = state.playlists
           .where((p) => p.id != playlistId)
           .toList();
 
@@ -171,13 +171,13 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
   /// Add song to playlist
   Future<PlaylistOperationResult> addSongToPlaylist(String playlistId, Song song) async {
     try {
-      final playlistIndex = state.playlists.indexWhere((p) => p.id == playlistId);
+      final int playlistIndex = state.playlists.indexWhere((p) => p.id == playlistId);
       if (playlistIndex == -1) {
         return PlaylistOperationResult.failure('Playlist not found');
       }
 
-      final playlist = state.playlists[playlistIndex];
-      final updatedPlaylist = playlist.addSong(song);
+      final EnhancedPlaylist playlist = state.playlists[playlistIndex];
+      final EnhancedPlaylist updatedPlaylist = playlist.addSong(song);
       
       return await updatePlaylist(updatedPlaylist);
     } catch (e) {
@@ -188,13 +188,13 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
   /// Add multiple songs to playlist
   Future<PlaylistOperationResult> addSongsToPlaylist(String playlistId, List<Song> songs) async {
     try {
-      final playlistIndex = state.playlists.indexWhere((p) => p.id == playlistId);
+      final int playlistIndex = state.playlists.indexWhere((p) => p.id == playlistId);
       if (playlistIndex == -1) {
         return PlaylistOperationResult.failure('Playlist not found');
       }
 
-      final playlist = state.playlists[playlistIndex];
-      final updatedPlaylist = playlist.addSongs(songs);
+      final EnhancedPlaylist playlist = state.playlists[playlistIndex];
+      final EnhancedPlaylist updatedPlaylist = playlist.addSongs(songs);
       
       return await updatePlaylist(updatedPlaylist);
     } catch (e) {
@@ -205,13 +205,13 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
   /// Remove song from playlist
   Future<PlaylistOperationResult> removeSongFromPlaylist(String playlistId, String songId) async {
     try {
-      final playlistIndex = state.playlists.indexWhere((p) => p.id == playlistId);
+      final int playlistIndex = state.playlists.indexWhere((p) => p.id == playlistId);
       if (playlistIndex == -1) {
         return PlaylistOperationResult.failure('Playlist not found');
       }
 
-      final playlist = state.playlists[playlistIndex];
-      final updatedPlaylist = playlist.removeSong(songId);
+      final EnhancedPlaylist playlist = state.playlists[playlistIndex];
+      final EnhancedPlaylist updatedPlaylist = playlist.removeSong(songId);
       
       return await updatePlaylist(updatedPlaylist);
     } catch (e) {
@@ -222,13 +222,13 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
   /// Reorder songs in playlist
   Future<PlaylistOperationResult> reorderSongs(String playlistId, int oldIndex, int newIndex) async {
     try {
-      final playlistIndex = state.playlists.indexWhere((p) => p.id == playlistId);
+      final int playlistIndex = state.playlists.indexWhere((p) => p.id == playlistId);
       if (playlistIndex == -1) {
         return PlaylistOperationResult.failure('Playlist not found');
       }
 
-      final playlist = state.playlists[playlistIndex];
-      final updatedPlaylist = playlist.reorderSongs(oldIndex, newIndex);
+      final EnhancedPlaylist playlist = state.playlists[playlistIndex];
+      final EnhancedPlaylist updatedPlaylist = playlist.reorderSongs(oldIndex, newIndex);
       
       return await updatePlaylist(updatedPlaylist);
     } catch (e) {
@@ -239,7 +239,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
   /// Duplicate a playlist
   Future<PlaylistOperationResult> duplicatePlaylist(String playlistId, String newName) async {
     try {
-      final originalPlaylist = state.playlists.firstWhere(
+      final EnhancedPlaylist originalPlaylist = state.playlists.firstWhere(
         (p) => p.id == playlistId,
         orElse: () => throw Exception('Playlist not found'),
       );
@@ -249,7 +249,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
         description: 'Copy of ${originalPlaylist.name}',
       ).then((result) async {
         if (result.success && result.playlist != null) {
-          final duplicatedPlaylist = result.playlist!.addSongs(originalPlaylist.songs);
+          final EnhancedPlaylist duplicatedPlaylist = result.playlist!.addSongs(originalPlaylist.songs);
           return await updatePlaylist(duplicatedPlaylist);
         }
         return result;
@@ -277,7 +277,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
   List<EnhancedPlaylist> searchPlaylists(String query) {
     if (query.trim().isEmpty) return state.playlists;
     
-    final lowercaseQuery = query.toLowerCase();
+    final String lowercaseQuery = query.toLowerCase();
     return state.playlists.where((playlist) {
       return playlist.name.toLowerCase().contains(lowercaseQuery) ||
              playlist.description.toLowerCase().contains(lowercaseQuery) ||
@@ -290,7 +290,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
 
   /// Select a playlist
   void selectPlaylist(String playlistId) {
-    final playlist = getPlaylist(playlistId);
+    final EnhancedPlaylist? playlist = getPlaylist(playlistId);
     state = state.copyWith(selectedPlaylist: playlist);
   }
 
@@ -301,7 +301,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
 
   /// Create default playlists
   Future<void> _createDefaultPlaylists() async {
-    final defaultPlaylists = [
+    final List<EnhancedPlaylist> defaultPlaylists = [
       EnhancedPlaylist.smart(
         name: 'Favorites',
         description: 'Your liked songs',
@@ -346,7 +346,7 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
       'collaborators': playlist.collaborators,
       'metadata': playlist.metadata,
       'type': playlist.type.name,
-      'customColor': playlist.customColor?.value,
+      'customColor': playlist.customColor?.toARGB32(),
     };
   }
 
@@ -367,10 +367,10 @@ class PlaylistManagementNotifier extends Notifier<PlaylistManagementState> {
         collaborators: List<String>.from(json['collaborators'] ?? []),
         metadata: Map<String, dynamic>.from(json['metadata'] ?? {}),
         type: PlaylistType.values.firstWhere(
-          (type) => type.name == json['type'],
+          (PlaylistType type) => type.name == json['type'],
           orElse: () => PlaylistType.user,
         ),
-        customColor: json['customColor'] != null ? Color(json['customColor']) : null,
+        customColor: json['customColor'] != null ? Color(json['customColor'] as int) : null,
       );
     } catch (e) {
       return null;
@@ -386,14 +386,14 @@ final playlistManagementProvider = NotifierProvider<PlaylistManagementNotifier, 
 /// User playlists provider (convenience)
 final userPlaylistsProvider = Provider<List<EnhancedPlaylist>>((ref) {
   return ref.watch(playlistManagementProvider).playlists
-      .where((p) => p.type == PlaylistType.user)
+      .where((EnhancedPlaylist p) => p.type == PlaylistType.user)
       .toList();
 });
 
 /// Smart playlists provider (convenience)
 final smartPlaylistsProvider = Provider<List<EnhancedPlaylist>>((ref) {
   return ref.watch(playlistManagementProvider).playlists
-      .where((p) => p.type == PlaylistType.smart)
+      .where((EnhancedPlaylist p) => p.type == PlaylistType.smart)
       .toList();
 });
 

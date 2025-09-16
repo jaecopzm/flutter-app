@@ -52,7 +52,6 @@ class DynamicThemeService {
     final mutedColor = generator.mutedColor?.color ?? dominantColor;
 
     // Create harmonious palette
-    final hsl = HSLColor.fromColor(vibrantColor);
     
     return DynamicColorPalette(
       primary: _adjustColorForTheme(vibrantColor),

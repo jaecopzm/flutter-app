@@ -242,17 +242,18 @@ class _EnhancedSearchScreenState extends ConsumerState<EnhancedSearchScreen>
     );
   }
 
-  Widget _buildBrowseContent(libraryState) {
-    return libraryState.when(
-      data: (library) {
-        if (library.songs.isEmpty) {
-          return _buildEmptyLibraryState();
-        }
-        return _buildBrowseContentData(library);
-      },
-      loading: () => _buildLoadingState(),
-      error: (error, stack) => _buildLoadingState(),
-    );
+  Widget _buildBrowseContent(MusicLibraryState libraryState) {
+    if (libraryState.isScanning) {
+      return _buildLoadingState();
+    }
+    if (libraryState.scanError != null) {
+      // TODO: Consider a dedicated error UI
+      return _buildLoadingState();
+    }
+    if (libraryState.songs.isEmpty) {
+      return _buildEmptyLibraryState();
+    }
+    return _buildBrowseContentData(libraryState);
   }
   
   Widget _buildBrowseContentData(library) {

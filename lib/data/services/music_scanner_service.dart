@@ -1,20 +1,36 @@
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import '../../core/constants/app_constants.dart';
 import '../models/song.dart';
 
 /// Service for scanning and extracting music files from device storage
 class MusicScannerService {
-  /// Request storage permission
+  /// Request storage permission (handles Android 13+ properly)
   Future<bool> requestStoragePermission() async {
-    final status = await Permission.storage.request();
+    final permission = await _getAppropriatePermission();
+    final status = await permission.request();
     return status.isGranted;
   }
 
-  /// Check if storage permission is granted
+  /// Check if storage permission is granted (handles Android 13+ properly)
   Future<bool> hasStoragePermission() async {
-    return await Permission.storage.isGranted;
+    final permission = await _getAppropriatePermission();
+    return await permission.isGranted;
+  }
+
+  /// Get the appropriate permission based on Android version
+  Future<Permission> _getAppropriatePermission() async {
+    if (Platform.isAndroid) {
+      final androidInfo = await DeviceInfoPlugin().androidInfo;
+      // Android 13+ (API 33+) uses granular permissions
+      if (androidInfo.version.sdkInt >= 33) {
+        return Permission.audio;
+      }
+    }
+    // Fallback to storage permission for older Android versions and other platforms
+    return Permission.storage;
   }
 
   /// Scan music files from device storage

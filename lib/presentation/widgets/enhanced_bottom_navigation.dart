@@ -105,7 +105,7 @@ class _EnhancedBottomNavigationState extends ConsumerState<EnhancedBottomNavigat
         color: AppColorsV2.surface,
         border: Border(
           top: BorderSide(
-            color: AppColorsV2.glassBorder.withOpacity(0.1),
+            color: AppColorsV2.glassBorder.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -149,7 +149,7 @@ class _EnhancedBottomNavigationState extends ConsumerState<EnhancedBottomNavigat
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         color: isActive
-                            ? AppColorsV2.dynamicPrimary.withOpacity(0.15)
+                            ? AppColorsV2.dynamicPrimary.withValues(alpha: 0.15)
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(12),
                       ),

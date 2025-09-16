@@ -110,8 +110,12 @@ class _EnhancedPlaylistsScreenState extends ConsumerState<EnhancedPlaylistsScree
     );
   }
 
-  Widget _buildContent(libraryState) {
-    if (libraryState.isLoading) {
+  Widget _buildContent(MusicLibraryState libraryState) {
+    if (libraryState.isScanning) {
+      return _buildLoadingState();
+    }
+    if (libraryState.scanError != null) {
+      // TODO: Consider a dedicated error UI
       return _buildLoadingState();
     }
     
